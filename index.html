@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roadbook Atelier Fitness</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--tx:#1a1d23;--mu:#6b7280;--bd:#e3e6eb;--ac:#2563eb;--ok:#16a34a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111317;--card:#1b1e25;--tx:#eceef2;--mu:#9aa1ae;--bd:#2c313b;--ac:#6b9bff;--ok:#4ade80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111317;--card:#1b1e25;--tx:#eceef2;--mu:#9aa1ae;--bd:#2c313b;--ac:#6b9bff;--ok:#4ade80;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:0 0 4px}
+.sub{color:var(--mu);font-size:13px;margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:12px}
+.info{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+label.f{font-size:12px;color:var(--mu);display:block}
+input[type=text],input[type=date],select{width:100%;padding:7px 8px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.bar{height:8px;background:var(--bd);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.pct{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.leg{font-size:12px;color:var(--mu);margin-top:6px}
+details{margin-bottom:10px}
+summary{cursor:pointer;font-weight:600;padding:12px;background:var(--card);border:1px solid var(--bd);border-radius:12px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+summary small{color:var(--mu);font-weight:500;white-space:nowrap}
+.sec{font-size:12px;font-weight:700;color:var(--ac);margin:12px 4px 4px;text-transform:uppercase}
+.it{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:10px 4px;border-bottom:1px solid var(--bd)}
+.it:last-child{border:0}
+.it input[type=checkbox]{width:22px;height:22px;accent-color:var(--ok);margin-top:2px}
+.it.done .t{color:var(--mu)}
+.r{font-weight:700;margin-right:4px}
+.m{grid-column:2;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:12px;color:var(--mu)}
+.m label{display:flex;align-items:center}
+.it .m .vt{width:16px;height:16px;margin:0 5px 0 0}
+.m select{width:auto;padding:3px 6px;font-size:12px}
+.pal{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--bd)}
+.pal>span{flex:1 0 100%;font-weight:600}
+.pal label{display:flex;gap:4px;align-items:center;font-size:13px}
+textarea{width:100%;min-height:80px;padding:8px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+button{padding:8px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit;cursor:pointer}
+</style></head><body><main>
+<h1>Roadbook technique &amp; livret de progression</h1>
+<div class="sub">Atelier Fitness</div>
+<div class="card info">
+<div><label class="f">Nom du technicien</label><input type="text" id="nom"></div>
+<div><label class="f">Tuteur / Référent</label><input type="text" id="tut"></div>
+<div><label class="f">Date d’entrée</label><input type="date" id="date"></div>
+</div>
+<div class="card top"><div class="pct"><b>Progression globale</b><span id="gp">0 %</span></div><div class="bar"><i id="gb"></i></div>
+<div class="leg">NV : non vu · OBS : assisté · PRA : pratique encadrée · AUT : autonomie (case cochée)</div></div>
+<div id="mods"></div>
+<details class="card" open><summary style="border:0;padding:0">Synthèse des paliers</summary><div id="syn"></div></details>
+<div class="card"><label class="f">Commentaires généraux du tuteur</label><textarea id="com"></textarea></div>
+<button id="rst">Tout réinitialiser</button>
+</main>
+<script>
+const D=[
+["Module 1 — Sécurité, environnement & organisation (5S)",[["",[
+["1.1","Port des EPI : chaussures de sécurité, gants adaptés (mécanique/coupures), lunettes de protection si nécessaire."],
+["1.2","Prévention & travail sous tension : risques d’électrisation/court-circuit, débrancher avant ouverture des carters, procédure de consignation."],
+["1.3","Balisage & sécurité de zone : délimiter la zone avec des panneaux en cas d’intervention à risque ou appareil ouvert."],
+["1.4","Organisation 5S du poste : nettoyage, tri de l’outillage et rangement du plan de travail avant chaque nouvel appareil."],
+["1.5","Gestion des stocks & linéaires : repérage par code couleur des pièces détachées par famille."],
+["1.6","Règles d’approvisionnement : préparer un besoin de commande et obtenir la validation du référent avant toute commande."]]]]],
+["Module 2 — Logiciels, traçabilité & facturation",[["",[
+["2.1","iCare (base & suivi) : rechercher un dossier, ouvrir une fiche, naviguer dans l’historique client et matériel."],
+["2.2","Traçabilité iCare & portail produits en attente : rédiger une note d’intervention exhaustive (historique mécanique + statut administratif)."],
+["2.3","Méthodes de facturation (iCare) : barèmes, pièces et main-d’œuvre selon le cadre (garantie, devis, hors-garantie)."],
+["2.4","CubeInStore & Atelier Connect : gestion des flux atelier et communication interne."],
+["2.5","Outils support Decathlon & TC : vidéos tutos, fiches techniques, décodage des codes erreurs via Support TC."]]]]],
+["Module 3 — Processus standard de PEC & expédition",[["",[
+["3.1","Définition de la PEC : rôle contractuel et technique dès l’arrivée du matériel."],
+["3.2","État des lieux initial : inspection visuelle à 360° (carrosserie, rayures, visserie manquante, oxydation, usure anormale)."],
+["3.3","Synthèse iCare : enregistrer immédiatement le compte-rendu de réception en quelques lignes claires."],
+["3.4","Diagnostic approfondi & tests croisés : permuter un composant pour isoler une panne sans fausse commande."],
+["3.5","Remise en état & nettoyage final : nettoyer et dégraisser l’appareil avant mise à disposition."],
+["3.6","Conditionnement & emballage : caler et protéger l’appareil réparé contre les avaries de transport."],
+["3.7","Expédition informatique & zone de flux : clôturer et expédier le flux, ranger l’appareil en zone d’expédition."]]]]],
+["Module 4 — Progression technique par gamme",[
+["Marques & partenaires",[
+["4.1.a","Marques propres / internes : connaissance de l’ensemble des gammes fitness du catalogue."],
+["4.1.b","Marques AMI (partenaires externes) : fonctionnement via leur propre SAV (garanties et pièces spécifiques)."]]],
+["Palier 1 : vélos d’appartement & elliptiques",[
+["P1.1","Démontage / remontage : sans casse des clips et vis, respect de la visserie d’origine."],
+["P1.2","Transmission (droite) : courroie, alignement poulie/roue d’inertie, manivelles/pédales, roulements."],
+["P1.3","Résistance (gauche) : servomoteur, positionnement des aimants, câble de tension."],
+["P1.4","Cinématique (elliptique) : contrôle et graissage des articulations, biellettes, bras oscillants, patins."],
+["P1.5","Électronique & capteurs : console, alimentation, capteur de vitesse (reed/aimant), pulsomètres hand-grip."]]],
+["Palier 2 : rameurs",[
+["P2.1","Systèmes de résistance : diagnostic et maintenance (magnétique, air/ailette, eau)."],
+["P2.2","Mécanisme de tirage : sangle/chaîne, tension du rappel élastique/ressort."],
+["P2.3","Chariot & rails : nettoyage, graissage, remplacement des galets/roulements du siège."],
+["P2.4","Capteurs & affichage : capteur de tirage/cadencemètre, faisceau et console."]]],
+["Palier 3 : tapis de course",[
+["P3.1","Sécurité haute tension : travail hors tension sur l’électronique de puissance (carte mère/condensateurs)."],
+["P3.2","Bande & plateau : centrage et tension de la bande, lubrification du plateau, rouleaux avant/arrière."],
+["P3.3","Moteur & entraînement : usure des charbons, collecteur, échauffement, courroie moteur."],
+["P3.4","Système d’inclinaison : vérin/moteur d’inclinaison, calibration, fin de course."],
+["P3.5","Carte de contrôle : variateur, LED de statut, clé de sécurité, capteur optique/magnétique."],
+["P3.6","Codes erreurs : support TC pour interpréter et résoudre les erreurs récurrentes (E01, E02, E05…)."]]]]],
+["Module 5 — Relation & satisfaction client",[["",[
+["5.1","Écoute active & posture de service : recueillir les symptômes sans jugement prématuré."],
+["5.2","Transparence & devoir de conseil : expliquer ce qui est réparable ou non (limites techniques, sécurité, coût)."],
+["5.3","Leviers de satisfaction : délais, clarté des explications, qualité de réparation, propreté du matériel rendu."]]]]]];
+const SY=["Socle sécurité, 5S & logiciels (Mod. 1 & 2)","Processus PEC & expédition (Mod. 3)","Palier 1 : vélos & elliptiques (Mod. 4)","Palier 2 : rameurs (Mod. 4)","Palier 3 : tapis de course (Mod. 4)","Relation & satisfaction client (Mod. 5)"];
+const ST=["NV","OBS","PRA","AUT"];
+let S={i:{},p:{},f:{},v:{}};
+try{S=Object.assign(S,JSON.parse(localStorage.getItem("roadbook")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem("roadbook",JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const fmt=d=>d?new Date(d).toLocaleDateString("fr-FR"):"";
+const all=[];
+const root=$("mods");
+D.forEach(([title,secs],mi)=>{
+ const det=document.createElement("details");if(mi==0)det.open=true;
+ const sum=document.createElement("summary");sum.innerHTML="<span>"+title+"</span><small></small>";det.appendChild(sum);
+ const box=document.createElement("div");box.className="card";det.appendChild(box);
+ const ids=[];
+ secs.forEach(([st,items])=>{
+  if(st){const h=document.createElement("div");h.className="sec";h.textContent=st;box.appendChild(h)}
+  items.forEach(([r,t])=>{
+   ids.push(r);all.push(r);
+   const row=document.createElement("div");row.className="it";row.id="r"+r;
+   row.innerHTML='<input type="checkbox"><div class="t"><span class="r">'+r+'</span>'+t+'</div><div class="m"><select>'+ST.map(s=>"<option>"+s+"</option>").join("")+'</select><span class="d"></span><label><input type="checkbox" class="vt"> Visa tuteur</label></div>';
+   const cb=row.querySelector("input"),sel=row.querySelector("select"),vt=row.querySelector(".vt");vt.onchange=()=>{S.v[r]=vt.checked;save();draw()};
+   const set=v=>{S.i[r]={s:v,d:v=="NV"?"":new Date().toISOString().slice(0,10)};save();draw()};
+   cb.onchange=()=>set(cb.checked?"AUT":"NV");
+   sel.onchange=()=>set(sel.value);
+   box.appendChild(row);
+  });
+ });
+ det._ids=ids;det._sum=sum.querySelector("small");
+ root.appendChild(det);
+});
+const syn=$("syn");
+SY.forEach((n,k)=>{
+ const d=document.createElement("div");d.className="pal";
+ d.innerHTML="<span>"+n+'</span><label><input type="checkbox" data-k="'+k+'p"> Partiel</label><label><input type="checkbox" data-k="'+k+'a"> Autonome</label><label><input type="checkbox" data-k="'+k+'vA"> Visa apprenant</label><label><input type="checkbox" data-k="'+k+'vR"> Visa référent</label>';
+ d.querySelectorAll("input").forEach(c=>c.onchange=()=>{
+  const k=c.dataset.k;S.p[k]=c.checked;
+  if(c.checked&&/[pa]$/.test(k)){const o=k.slice(0,-1)+(k.slice(-1)=="p"?"a":"p");S.p[o]=false}
+  save();draw()});
+ syn.appendChild(d);
+});
+[["nom","nom"],["tut","tut"],["date","date"],["com","com"]].forEach(([id,k])=>{
+ const e=$(id);e.value=S.f[k]||"";e.oninput=()=>{S.f[k]=e.value;save()}});
+function draw(){
+ let tot=0;
+ document.querySelectorAll("details").forEach(det=>{
+  if(!det._ids)return;
+  let n=0;
+  det._ids.forEach(r=>{
+   const v=(S.i[r]||{}).s||"NV",row=$("r"+r);
+   row.querySelector("input").checked=v=="AUT";
+   row.querySelector("select").value=v;row.querySelector(".vt").checked=!!S.v[r];
+   row.querySelector(".d").textContent=S.i[r]&&S.i[r].d?fmt(S.i[r].d):"";
+   row.classList.toggle("done",v=="AUT");
+   if(v=="AUT")n++;
+  });
+  tot+=n;det._sum.textContent=n+" / "+det._ids.length;
+ });
+ const p=Math.round(tot/all.length*100);
+ $("gp").textContent=tot+" / "+all.length+" · "+p+" %";$("gb").style.width=p+"%";
+ document.querySelectorAll("#syn input").forEach(c=>c.checked=!!S.p[c.dataset.k]);
+}
+$("rst").onclick=()=>{if(confirm("Tout réinitialiser ?")){S={i:{},p:{},f:{},v:{}};save();["nom","tut","date","com"].forEach(i=>$(i).value="");draw()}};
+draw();
+</script></body></html>
